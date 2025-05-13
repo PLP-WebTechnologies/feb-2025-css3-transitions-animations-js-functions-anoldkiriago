@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSS Animation & localStorage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: coral;
+      margin: 20px auto;
+      transition: transform 0.5s ease-in-out, background-color 0.5s;
+    }
+
+    #box.animate {
+      transform: rotate(360deg) scale(1.5);
+      background-color: lightgreen;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS3 Animations & JavaScript with localStorage</h1>
+
+  <button id="animateBtn">Animate Me</button>
+  <button id="savePrefBtn">Save Preference</button>
+  <button id="loadPrefBtn">Load Preference</button>
+
+  <div id="box"></div>
+
+  <script>
+    const box = document.getElementById("box");
+    const animateBtn = document.getElementById("animateBtn");
+    const saveBtn = document.getElementById("savePrefBtn");
+    const loadBtn = document.getElementById("loadPrefBtn");
+
+    // Trigger animation on click
+    animateBtn.addEventListener("click", () => {
+      box.classList.toggle("animate");
+    });
+
+    // Save favorite color to localStorage
+    saveBtn.addEventListener("click", () => {
+      const color = prompt("Enter your favorite color (e.g., blue, #ffcc00):");
+      if (color) {
+        localStorage.setItem("favoriteColor", color);
+        alert("Preference saved!");
+      }
+    });
+
+    // Load and apply favorite color from localStorage
+    loadBtn.addEventListener("click", () => {
+      const color = localStorage.getItem("favoriteColor");
+      if (color) {
+        box.style.backgroundColor = color;
+        alert(`Applied your favorite color: ${color}`);
+      } else {
+        alert("No color preference found.");
+      }
+    });
+  </script>
+
+</body>
+</html>
